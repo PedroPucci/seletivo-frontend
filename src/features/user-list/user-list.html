@@ -1,0 +1,206 @@
+<div class="page">
+  <aside class="sidebar">
+    <div class="brand">TechsysLog</div>
+
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active-link">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+      </a>
+
+      <a routerLink="/users" routerLinkActive="active-link">
+        <i class="fa-solid fa-users"></i>
+        Usuários
+      </a>
+
+      <a routerLink="/orders" routerLinkActive="active-link">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Pedidos
+      </a>
+    </nav>
+  </aside>
+
+  <main class="content">
+
+    @if (showToast) {
+      <div class="toast-success">
+        <i class="fa-solid fa-circle-check"></i>
+        {{ toastMessage }}
+      </div>
+    }
+
+    <div class="topbar">
+      <button class="logout-button" routerLink="/">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Sair
+      </button>
+    </div>
+
+    <header class="header">
+      <h1>Usuários</h1>
+
+      <p>
+        Liste e pesquise os usuários cadastrados no sistema.
+      </p>
+    </header>
+
+    <section class="filters">
+
+      <div class="field">
+        <input
+          type="text"
+          name="searchName"
+          [(ngModel)]="searchName"
+          placeholder="Pesquisar por nome"
+        />
+      </div>
+
+      <div class="field">
+        <input
+          type="text"
+          name="searchEmail"
+          [(ngModel)]="searchEmail"
+          placeholder="Pesquisar por email"
+        />
+      </div>
+
+      <div class="search-actions">
+        <button class="search-button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          Pesquisar
+        </button>
+      </div>
+
+    </section>
+
+    <section class="table-card">
+
+      <div class="table-header">
+
+        <div>
+          <h2>Lista de usuários</h2>
+
+          <span class="table-subtitle">
+            Gerencie os usuários cadastrados
+          </span>
+        </div>
+
+        <button
+          class="add-button"
+          routerLink="/users/create"
+        >
+          <i class="fa-solid fa-plus"></i>
+          Adicionar
+        </button>
+
+      </div>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Perfil</th>
+            <th>Data criação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @if (users.length === 0) {
+
+            <tr>
+              <td colspan="5" class="empty-state">
+                Nenhum usuário encontrado.
+              </td>
+            </tr>
+
+          } @else {
+
+            @for (user of users; track user.email) {
+
+              <tr>
+
+                <td>
+                  {{ user.name }}
+                </td>
+
+                <td>
+                  {{ user.email }}
+                </td>
+
+                <td>
+                  <span class="badge">
+                    {{ user.role }}
+                  </span>
+                </td>
+
+                <td>
+                  {{ user.createdAt }}
+                </td>
+
+                <td>
+
+                  <div class="actions-icons">
+
+                    <button class="edit-button">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+
+                    <button
+                      class="delete-button"
+                      (click)="confirmDelete(user)"
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          }
+
+        </tbody>
+
+      </table>
+
+      <div class="pagination">
+
+        <span class="pagination-info">
+          1-10 de 24 usuários
+        </span>
+
+        <div class="pagination-buttons">
+
+          <button class="page-button">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <button class="page-number active-page">
+            1
+          </button>
+
+          <button class="page-number">
+            2
+          </button>
+
+          <button class="page-number">
+            3
+          </button>
+
+          <button class="page-button">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>

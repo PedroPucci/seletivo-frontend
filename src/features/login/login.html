@@ -1,0 +1,49 @@
+<div class="page">
+  <section class="card">
+    <div class="icon">🔐</div>
+
+    <h1>Login</h1>
+
+    <p>Entre com suas credenciais para acessar o sistema.</p>
+
+    <form (ngSubmit)="login()">
+      <label>Usuário</label>
+
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        placeholder="Digite seu usuário"
+      />
+
+      @if (usernameError) {
+        <span class="error-message">
+          {{ usernameError }}
+        </span>
+      }
+
+      <label>Senha</label>
+
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Digite sua senha"
+      />
+
+      @if (passwordError) {
+        <span class="error-message">
+          {{ passwordError }}
+        </span>
+      }
+
+      <button type="submit">
+        Entrar
+      </button>
+
+      <a class="secondary-button" routerLink="/users/create">
+        Criar novo usuário
+      </a>
+    </form>
+  </section>
+</div>

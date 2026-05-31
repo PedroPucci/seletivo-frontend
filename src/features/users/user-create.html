@@ -1,0 +1,75 @@
+<div class="page">
+  <section class="card">
+
+    <div class="icon">
+      👤
+    </div>
+
+    <h1>Cadastro de Usuário</h1>
+
+    <p>
+      Preencha os campos abaixo para criar um novo usuário.
+    </p>
+
+    <form (ngSubmit)="save()">
+
+      <label>Nome</label>
+
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="user.name"
+        placeholder="Digite o nome"
+      />
+
+      @if (nameError) {
+        <span class="error-message">
+          {{ nameError }}
+        </span>
+      }
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="user.email"
+        placeholder="Digite o email"
+      />
+
+      @if (emailError) {
+        <span class="error-message">
+          {{ emailError }}
+        </span>
+      }
+
+      <label>Senha</label>
+
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="user.password"
+        placeholder="Digite a senha"
+      />
+
+      @if (passwordError) {
+        <span class="error-message">
+          {{ passwordError }}
+        </span>
+      }
+
+      <button type="submit">
+        Cadastrar Usuário
+      </button>
+
+      <button
+        type="button"
+        class="secondary"
+        (click)="cancel()"
+      >
+        Cancelar
+      </button>
+
+    </form>
+  </section>
+</div>
